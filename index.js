@@ -2,6 +2,7 @@ const Kahoot = require("kahoot.js-updated");
 var express = require('express');
 var flatted = require('flatted');
 var fs = require('fs')
+var mime = require('mime-types')
 var games = [];
 var logging = true // set to false to disable logs
 var app = express()
@@ -121,10 +122,21 @@ app.get("/bot_count",function(request,response){
 
 app.get("/:page", function (request, response) {
     if (fs.existsSync(request.params.page)) {
+        response.writeHead(200, {
+            "content-type": mime.lookup(request.params.page),
+            'cache-control': 'no-cache',
+            'access-control-allow-origin': '*',
+            'connection': 'keep-alive'
+        });
         fs.createReadStream(request.params.page).pipe(response);
     }
     else {
-
+        response.writeHead(404, {
+            "content-type": "text/html",
+            'cache-control': 'no-cache',
+            'access-control-allow-origin': '*',
+            'connection': 'keep-alive'
+        });
         fs.createReadStream("404.html").pipe(response);
     }
 })

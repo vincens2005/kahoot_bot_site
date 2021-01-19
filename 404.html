@@ -1,7 +1,45 @@
 <!DOCTYPE html>
 <html>
-    <head></head>
-    <body>
-        <h1>AAAAAAAAA 404</h1>
-    </body>
+
+<head>
+    <link rel="stylesheet" href="signup.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, height=device-height" />
+    <title>404 - Kahoot Bot Service - totally legit</title>
+    <script>
+        var songs = ["Yes/Run Through The Light", "Yes/Machine Messiah", "lil nas x/old town road", "katy perry/roar", "taylor swift/shake it off"]
+        function sendbots() {
+            window.location = "/";
+        }
+        function init() {
+            fetch("https://api.lyrics.ovh/v1/" + songs[Math.floor(
+                (Math.random() * (songs.length - 1)) + 0)])
+                .then(a => a.json())
+                .then(response => {
+                    var lines = response.lyrics.split("\n")
+                    for (var ii = 0; ii < 2; ii++) {
+                        for (i in lines) {
+                            if (lines[i] == null || lines[i] == "" || lines[i] == undefined || lines[i] == "undefined") {
+                                lines.splice(i, 1)
+                            }
+                        }
+                    }
+                    document.getElementById("legit").innerHTML = lines[Math.floor(
+                        (Math.random() * (lines.length - 1)) + 0)]
+                })
+        }
+    </script>
+</head>
+
+<body onload="init()">
+    <h1 id="signup">Error 404</h1>
+    <p style="width: 100%; text-align: center; font-family:sans-serif; font-size: 20px; margin-top: -50px;" id="legit">
+    </p>
+    <div class="br"></div>
+    <div class="openbutton" onclick="sendbots()"><span
+            style="vertical-align: middle; display: inline-block; line-height: 50px;">Take Me Home</span></div>
+    <div id="output"></div>
+    <br><br>
+</body>
+
 </html>

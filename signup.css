@@ -27,6 +27,8 @@ h2{
     #signup {
         text-align: center;
         margin-top: 10%;
+
+        margin-bottom: 5%;
         width: 100%;
         font-family: sans-serif;
         font-size: 80px;
@@ -56,6 +58,7 @@ h2{
     #signup {
         text-align: center;
         margin-top: 10%;
+        margin-bottom: 10%;
         width: 100%;
         font-family: sans-serif;
         font-size: 60px;
