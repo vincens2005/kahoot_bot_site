@@ -3,6 +3,10 @@
         "start": "node index.js"
     },
     "dependencies": {
+        "express": "^4.17.1",
+        "flatted": "^3.1.1",
+        "fs": "0.0.1-security",
+        "kahoot.js-updated": "^2.3.2",
         "mime-types": "^2.1.28"
     }
 }
