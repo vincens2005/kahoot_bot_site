@@ -121,6 +121,9 @@ app.get("/bot_count",function(request,response){
 })
 
 app.get("/:page", function (request, response) {
+    if(logging){
+        console.log("request: "+request.params.page)
+    }
     if (fs.existsSync(request.params.page)) {
         response.writeHead(200, {
             "content-type": mime.lookup(request.params.page),
@@ -141,6 +144,12 @@ app.get("/:page", function (request, response) {
     }
 })
 app.get("/", function (request, response) {
+    response.writeHead(200, {
+        "content-type": "text/html",
+        'cache-control': 'no-cache',
+        'access-control-allow-origin': '*',
+        'connection': 'keep-alive'
+    })
     fs.createReadStream("index.html").pipe(response);
 })
 app.listen(port);

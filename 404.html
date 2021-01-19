@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, height=device-height" />
     <title>404 - Kahoot Bot Service - totally legit</title>
     <script>
-        var songs = ["Yes/Run Through The Light", "Yes/Machine Messiah", "lil nas x/old town road", "katy perry/roar", "taylor swift/shake it off"]
+        var songs = ["Yes/Run Through The Light", "Yes/Machine Messiah", "lil nas x/old town road", "katy perry/roar", "taylor swift/shake it off","gentle giant/proclamation"]
         function sendbots() {
             window.location = "/";
         }
@@ -16,6 +16,10 @@
                 (Math.random() * (songs.length - 1)) + 0)])
                 .then(a => a.json())
                 .then(response => {
+                    if(response.lyrics.length < 10){
+                        init()
+                        return
+                    }
                     var lines = response.lyrics.split("\n")
                     for (var ii = 0; ii < 2; ii++) {
                         for (i in lines) {
@@ -27,6 +31,7 @@
                     document.getElementById("legit").innerHTML = lines[Math.floor(
                         (Math.random() * (lines.length - 1)) + 0)]
                 })
+                return
         }
     </script>
 </head>
