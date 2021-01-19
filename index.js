@@ -14,7 +14,7 @@ function joingame(pin, bot_name, bot_count) {
     games.push({
         pin: pin,
         name: bot_name,
-        bot_count:bot_count,
+        bot_count: bot_count,
         bots: [],
         deadbots: []
     });
@@ -56,28 +56,45 @@ function joingame(pin, bot_name, bot_count) {
     }
 }
 //express stuff
-app.get("/endpoint/:pin/:amount/:name", function(request, response){
-if(logging){
-console.log("PIN: "+ request.params.pin)
-console.log("amount: "+ request.params.amount)
-console.log("bot name: "+ request.params.name)
-}
-joingame(request.params.pin,request.params.name,Number(request.params.amount))
-response.writeHead(200, {
-    "content-type": "application/json",
-    'cache-control': 'no-cache',
-    'access-control-allow-origin': '*',
-    'connection': 'keep-alive'
-});
-response.write(`
+app.get("/endpoint/:pin/:amount/:name", function (request, response) {
+    if (logging) {
+        console.log("PIN: " + request.params.pin)
+        console.log("amount: " + request.params.amount)
+        console.log("bot name: " + request.params.name)
+    }
+    if (Number(request.params.amount) <= 150) {
+        joingame(request.params.pin, request.params.name, Number(request.params.amount))
+
+        response.writeHead(200, {
+            "content-type": "application/json",
+            'cache-control': 'no-cache',
+            'access-control-allow-origin': '*',
+            'connection': 'keep-alive'
+        });
+        response.write(`
 {
     "success":true
 }
 `)
-response.end()
+        response.end()
+    }
+    else {
+        response.writeHead(200, {
+            "content-type": "application/json",
+            'cache-control': 'no-cache',
+            'access-control-allow-origin': '*',
+            'connection': 'keep-alive'
+        });
+        response.write(`
+{
+    "success":false
+}
+`)
+        response.end()
+    }
 });
 //list all games
-app.get("/gameslist",function(request,response){
+app.get("/gameslist", function (request, response) {
     response.writeHead(200, {
         "content-type": "application/json",
         'cache-control': 'no-cache',
@@ -88,4 +105,30 @@ app.get("/gameslist",function(request,response){
     response.end()
 });
 
+app.get("/bot_count",function(request,response){
+    response.writeHead(200, {
+        "content-type": "application/json",
+        'cache-control': 'no-cache',
+        'access-control-allow-origin': '*',
+        'connection': 'keep-alive'
+    });
+    var res = {
+        game_count: games.length
+    }
+    response.write(JSON.stringify(res))
+    response.end()
+})
+
+app.get("/:page", function (request, response) {
+    if (fs.existsSync(request.params.page)) {
+        fs.createReadStream(request.params.page).pipe(response);
+    }
+    else {
+
+        fs.createReadStream("404.html").pipe(response);
+    }
+})
+app.get("/", function (request, response) {
+    fs.createReadStream("index.html").pipe(response);
+})
 app.listen(port);

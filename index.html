@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="signup.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, height=device-height" />
+    <title>Kahoot Bot Service - totally legit</title>
+    <script>
+        function checkinput(data) {
+            if (data.keyCode == 13) {
+                sendbots()
+            }
+        }
+        function init() {
+            fetch("/bot_count")
+                .then(a => a.json())
+                .then(response => {
+                    console.log(response)
+                    document.getElementById("over500").innerHTML = "Playing over " + (response.game_count - 1) + " games"
+                })
+        }
+        function sendbots() {
+            if (validateform()) {
+                // do stuff
+                var gamepin = document.getElementById("gamepin").value;
+                var bot_count = document.getElementById("bot_count").value;
+                var bot_name = document.getElementById("bot_name").value;
+                document.getElementById("output").innerHTML = "<p id='subbed'>Working...</p>";
+                fetch("/endpoint/"+gamepin+"/"+bot_count+"/"+bot_name)
+                    .then(a => a.json())
+                    .then(response => {
+                        if(response.success){
+                            document.getElementById("output").innerHTML = "<p id='subbed'>Done! Bots should join momentarily</p>";
+                        }
+                        else{
+                            document.getElementById("output").innerHTML = "<p id='notsubbed'>Error. Try again.</p>";
+                        }
+                    })
+            }
+        }
+        function validateform() {
+            if (String(Number(document.getElementById("gamepin").value)) == "NaN" || document.getElementById("gamepin").value == null || document.getElementById("gamepin").value == "") {
+                document.getElementById("output").innerHTML = "<p id='notsubbed'>Invalid game pin</p>";
+                return false
+            }
+            if (String(Number(document.getElementById("bot_count").value)) == "NaN" || Number(document.getElementById("bot_count").value) > 150 || document.getElementById("bot_count").value == null || document.getElementById("bot_count").value == "" || Number(document.getElementById("bot_count").value) < 1 ) {
+                document.getElementById("output").innerHTML = "<p id='notsubbed'>Bot count must be a number bewtween 1 and 150</p>";
+                return false
+            }
+            if (document.getElementById("bot_name").value == null || document.getElementById("bot_name").value == "") {
+                document.getElementById("output").innerHTML = "<p id='notsubbed'>Bot name must exist</p>";
+                return false
+            }
+            return true
+        }
+    </script>
+</head>
+
+<body onload="init()">
+    <h1 id="signup">KahootBot</h1>
+    <p style="width: 100%; text-align: center; font-family:sans-serif; font-size: 20px; margin-top: -50px;">Super legit
+        kahoot bot</p>
+    <span class="spnn"></span>
+    <input placeholder="Pin" onkeypress="checkinput(event)" id="gamepin">
+    <input placeholder="Bot Name" onkeypress="checkinput(event)" id="bot_name">
+    <input placeholder="Bots" onkeypress="checkinput(event)" id="bot_count" value="50">
+    <span class="spnn"></span>
+    <div class="br"></div>
+    <div class="openbutton" onclick="sendbots()"><span
+            style="vertical-align: middle; display: inline-block; line-height: 50px;">Send Bots!</span></div>
+    <div id="output"></div>
+    <br><br>
+    <h2 id="over500"></h2>
+</body>
+
+</html>
