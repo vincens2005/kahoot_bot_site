@@ -1,9 +1,12 @@
 html {
     scroll-behavior: smooth;
-    background-color: rgb(44, 44, 44);
+    background-image: url(background.png);
+    background-size: cover;
     color: white;
     height: 100%;
 }
+
+
 
 *::-webkit-scrollbar {
     display: none;
