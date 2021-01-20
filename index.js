@@ -6,7 +6,7 @@ var mime = require('mime-types')
 var games = [];
 var logging = true // set to false to disable logs
 var app = express()
-var port = 5500
+var port = process.env.PORT || 5500
 
 //kahoot function. Handles all gameplay
 
