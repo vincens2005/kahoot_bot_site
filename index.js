@@ -4,11 +4,11 @@ var flatted = require('flatted');
 var fs = require('fs')
 var mime = require('mime-types')
 var games = [];
-var logging = Boolean(Number(process.env.LOGGING))// set to false to disable logs
+var logging = Boolean(Number(process.env.LOGGING)) // set to false to disable logs
 var app = express()
 var port = process.env.PORT || 5500
-if(logging){
-console.log(process.env.PORT)
+if (logging) {
+    console.log(process.env.PORT)
 }
 //kahoot function. Handles all gameplay
 
@@ -59,7 +59,7 @@ function joingame(pin, bot_name, bot_count) {
     }
 }
 //express stuff
-app.get("/endpoint/:pin/:amount/:name", function (request, response) {
+app.get("/endpoint/:pin/:amount/:name", function(request, response) {
     if (logging) {
         console.log("PIN: " + request.params.pin)
         console.log("amount: " + request.params.amount)
@@ -80,8 +80,7 @@ app.get("/endpoint/:pin/:amount/:name", function (request, response) {
 }
 `)
         response.end()
-    }
-    else {
+    } else {
         response.writeHead(200, {
             "content-type": "application/json",
             'cache-control': 'no-cache',
@@ -97,7 +96,7 @@ app.get("/endpoint/:pin/:amount/:name", function (request, response) {
     }
 });
 //list all games
-app.get("/gameslist", function (request, response) {
+app.get("/gameslist", function(request, response) {
     response.writeHead(200, {
         "content-type": "application/json",
         'cache-control': 'no-cache',
@@ -108,7 +107,7 @@ app.get("/gameslist", function (request, response) {
     response.end()
 });
 
-app.get("/bot_count",function(request,response){
+app.get("/bot_count", function(request, response) {
     response.writeHead(200, {
         "content-type": "application/json",
         'cache-control': 'no-cache',
@@ -122,9 +121,9 @@ app.get("/bot_count",function(request,response){
     response.end()
 })
 
-app.get("/:page", function (request, response) {
-    if(logging){
-        console.log("request: "+request.params.page)
+app.get("/:page", function(request, response) {
+    if (logging) {
+        console.log("request: " + request.params.page)
     }
     if (fs.existsSync(request.params.page)) {
         response.writeHead(200, {
@@ -134,8 +133,7 @@ app.get("/:page", function (request, response) {
             'connection': 'keep-alive'
         });
         fs.createReadStream(request.params.page).pipe(response);
-    }
-    else {
+    } else {
         response.writeHead(404, {
             "content-type": "text/html",
             'cache-control': 'no-cache',
@@ -145,7 +143,7 @@ app.get("/:page", function (request, response) {
         fs.createReadStream("404.html").pipe(response);
     }
 })
-app.get("/", function (request, response) {
+app.get("/", function(request, response) {
     response.writeHead(200, {
         "content-type": "text/html",
         'cache-control': 'no-cache',

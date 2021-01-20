@@ -9,32 +9,28 @@
     <title>Kahoot Bot Service - totally legit</title>
     <!--meta tags from metatags.io-->
     <meta name="title" content="Kahoot! Bot">
-    <meta name="description"
-        content="Make up to 150 Kahoot bots to play in your game. Simply type in the game pin, the name of the bot, and how many you want for hours of automated gaming fun!">
+    <meta name="description" content="Make up to 150 Kahoot bots to play in your game. Simply type in the game pin, the name of the bot, and how many you want for hours of automated gaming fun!">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kahootbots.gq/">
     <meta property="og:title" content="Kahoot! Bot">
-    <meta property="og:description"
-        content="Make up to 150 Kahoot bots to play in your game. Simply type in the game pin, the name of the bot, and how many you want for hours of automated gaming fun!">
-    <meta property="og:image"
-        content="favicon.png">
+    <meta property="og:description" content="Make up to 150 Kahoot bots to play in your game. Simply type in the game pin, the name of the bot, and how many you want for hours of automated gaming fun!">
+    <meta property="og:image" content="favicon.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://kahootbots.gq/">
     <meta property="twitter:title" content="Kahoot! Bot">
-    <meta property="twitter:description"
-        content="Make up to 150 Kahoot bots to play in your game. Simply type in the game pin, the name of the bot, and how many you want for hours of automated gaming fun!">
-    <meta property="twitter:image"
-        content="favicon.png">
+    <meta property="twitter:description" content="Make up to 150 Kahoot bots to play in your game. Simply type in the game pin, the name of the bot, and how many you want for hours of automated gaming fun!">
+    <meta property="twitter:image" content="favicon.png">
     <script>
         function checkinput(data) {
             if (data.keyCode == 13) {
                 sendbots()
             }
         }
+
         function init() {
             fetch("/bot_count")
                 .then(a => a.json())
@@ -43,6 +39,7 @@
                     document.getElementById("over500").innerHTML = "Playing over " + (response.game_count - 1) + " games"
                 })
         }
+
         function sendbots() {
             if (validateform()) {
                 // do stuff
@@ -55,13 +52,13 @@
                     .then(response => {
                         if (response.success) {
                             document.getElementById("output").innerHTML = "<p id='subbed'>Done! Bots should join momentarily</p>";
-                        }
-                        else {
+                        } else {
                             document.getElementById("output").innerHTML = "<p id='notsubbed'>Error. Try again.</p>";
                         }
                     })
             }
         }
+
         function validateform() {
             if (String(Number(document.getElementById("gamepin").value)) == "NaN" || document.getElementById("gamepin").value == null || document.getElementById("gamepin").value == "") {
                 document.getElementById("output").innerHTML = "<p id='notsubbed'>Invalid game pin</p>";
@@ -78,16 +75,11 @@
             return true
         }
     </script>
-    <style>
-    body {
-      background-color: transparent;
-      font-family: sans;
-    }
-    </style>
+
 </head>
 
 <body onload="init()">
-    <h1 class="glow" id="signup">KahootBot</h1>
+    <h1 id="signup">KahootBot</h1>
     <p style="width: 100%; text-align: center; font-family:sans-serif; font-size: 20px; margin-top: -50px;">Super legit
         kahoot bot</p>
     <span class="spnn"></span>
@@ -96,8 +88,7 @@
     <input placeholder="Bots" onkeypress="checkinput(event)" id="bot_count" value="50">
     <span class="spnn"></span>
     <div class="br"></div>
-    <div class="openbutton" onclick="sendbots()"><span
-            style="vertical-align: middle; display: inline-block; line-height: 50px;">Send Bots!</span></div>
+    <div class="openbutton" onclick="sendbots()"><span style="vertical-align: middle; display: inline-block; line-height: 50px;">Send Bots!</span></div>
     <div id="output"></div>
     <br><br>
     <h2 id="over500"></h2>

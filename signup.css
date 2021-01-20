@@ -1,5 +1,6 @@
 html {
     scroll-behavior: smooth;
+    background-color: rgb(44, 44, 44);
     background-image: url(background.png);
     background-size: cover;
     color: white;
@@ -16,16 +17,19 @@ html {
     scrollbar-width: none;
     overflow: -moz-scrollbars-none !important;
 }
-.center{
+
+.center {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
 }
-h2{
+
+h2 {
     text-align: center;
     width: 100%;
     font-family: sans-serif;
 }
+
 @media (min-width: 950px) {
     #signup {
         text-align: center;
@@ -36,9 +40,15 @@ h2{
         font-family: sans-serif;
         font-size: 80px;
     }
+
     #signup>img {
         height: 150px;
     }
+}
+
+body {
+    background-color: transparent;
+    font-family: sans;
 }
 
 .openbutton {
@@ -54,9 +64,11 @@ h2{
     cursor: pointer;
     transition: 0.6s;
 }
-.openbutton:hover{
+
+.openbutton:hover {
     box-shadow: rgb(15, 15, 15) 4px 8px 10px;
 }
+
 @media (max-width: 949px) {
     #signup {
         text-align: center;
@@ -66,6 +78,7 @@ h2{
         font-family: sans-serif;
         font-size: 60px;
     }
+
     #signup>img {
         height: 130px;
     }
@@ -86,6 +99,7 @@ h1 {
     text-align: center;
     font-family: sans-serif;
 }
+
 #notsubbed {
     color: rgb(255, 74, 74);
     text-align: center;
@@ -139,6 +153,7 @@ a {
     0% {
         transform: translateX(30%);
     }
+
     100% {
         transform: translateX(100%);
     }
@@ -148,6 +163,7 @@ a {
     0% {
         transform: translateY(-1%);
     }
+
     100% {
         transform: translateY(1%);
     }
@@ -157,9 +173,11 @@ a {
     0% {
         opacity: 0;
     }
+
     50% {
         opacity: 0;
     }
+
     100% {
         opacity: 1;
     }
@@ -169,19 +187,24 @@ a {
     0% {
         transform: translateX(0);
     }
+
     25% {
         transform: translateX(5px);
     }
+
     50% {
         transform: translateX(-5px);
     }
+
     75% {
         transform: translateX(5px);
     }
+
     100% {
         transform: translateX(0);
     }
 }
+
 input {
     background: transparent;
     border-top: none;
@@ -195,22 +218,28 @@ input {
     margin-right: auto;
     transition: 0.3s;
 }
-#gamepin{
-    width:70px;
+
+#gamepin {
+    width: 70px;
 }
-#bot_name{
+
+#bot_name {
     width: 150px;
 }
-#bot_count{
+
+#bot_count {
     width: 50px;
 }
-.br{
+
+.br {
     padding-top: 15px;
 }
+
 input:focus {
     border-bottom: 2px solid white;
 }
+
 .spnn {
     display: inline-block;
-    width:calc(50% - 150px);
+    width: calc(50% - 150px);
 }
