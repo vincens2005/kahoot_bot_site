@@ -78,10 +78,35 @@
             return true
         }
     </script>
+    <style>
+    body {
+      background-color: transparent;
+      font-family: sans;
+    }
+    
+    .glow {
+      font-size: 80px;
+      color: #fff;
+      text-align: center;
+      -webkit-animation: glow 1s ease-in-out infinite alternate;
+      -moz-animation: glow 1s ease-in-out infinite alternate;
+      animation: glow 1s ease-in-out infinite alternate;
+    }
+    
+    @-webkit-keyframes glow {
+      from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #160ef1, 0 0 40px #160ef1, 0 0 50px #160ef1, 0 0 60px #160ef1, 0 0 70px #160ef1;
+      }
+      
+      to {
+        text-shadow: 0 0 20px #fff, 0 0 30px #06043f, 0 0 40px #06043f, 0 0 50px #06043f, 0 0 60px #06043f, 0 0 70px #06043f, 0 0 80px #06043f;
+      }
+    }
+    </style>
 </head>
 
 <body onload="init()">
-    <h1 id="signup">KahootBot</h1>
+    <h1 class="glow" id="signup">KahootBot</h1>
     <p style="width: 100%; text-align: center; font-family:sans-serif; font-size: 20px; margin-top: -50px;">Super legit
         kahoot bot</p>
     <span class="spnn"></span>
