@@ -4,10 +4,12 @@ var flatted = require('flatted');
 var fs = require('fs')
 var mime = require('mime-types')
 var games = [];
-var logging = true // set to false to disable logs
+var logging = Boolean(Number(process.env.LOGGING))// set to false to disable logs
 var app = express()
 var port = process.env.PORT || 5500
-
+if(logging){
+console.log(process.env.PORT)
+}
 //kahoot function. Handles all gameplay
 
 function joingame(pin, bot_name, bot_count) {
