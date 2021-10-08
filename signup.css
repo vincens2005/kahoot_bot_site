@@ -1,7 +1,6 @@
 html {
     scroll-behavior: smooth;
     background-color: rgb(44, 44, 44);
-    background-image: url(background.png);
     background-size: cover;
     color: white;
     height: 100%;
@@ -211,12 +210,11 @@ input {
     border-left: none;
     outline: none;
     border-right: none;
-    border-bottom: 1px solid rgb(185, 185, 185);
+    border-bottom: 1px solid rgb(185, 184, 185);
     color: white;
     font-size: 20px;
     margin-left: auto;
     margin-right: auto;
-    transition: 0.3s;
 }
 
 #gamepin {
